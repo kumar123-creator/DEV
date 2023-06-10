@@ -56,9 +56,9 @@
         onRowUpdating: async (e) => {
           const updatedData = e.newData;
           const response = await fetch(
-            `https://api.recruitly.io/api/candidate?apiKey=TEST1236C4CF23E6921C41429A6E1D546AC9535E`,
+            `https://api.recruitly.io/api/candidate/${e.key}?apiKey=TEST1236C4CF23E6921C41429A6E1D546AC9535E`,
             {
-              method: "POST",
+              method: "PUT",
               headers: {
                 "Content-Type": "application/json",
               },
@@ -71,6 +71,25 @@
             dataGrid.refresh();
           } else {
             console.error("Error updating data:", response.statusText);
+          }
+        },
+        onRowInserting: async (e) => {
+          const newData = e.data;
+          const response = await fetch(
+            `https://api.recruitly.io/api/candidate?apiKey=TEST1236C4CF23E6921C41429A6E1D546AC9535E`,
+            {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify(newData),
+            }
+          );
+
+          if (response.ok) {
+            dataGrid.refresh();
+          } else {
+            console.error("Error inserting data:", response.statusText);
           }
         },
         onRowRemoving: async (e) => {
@@ -137,4 +156,3 @@
 </style>
 
 <div id="dataGrid"></div>
-
