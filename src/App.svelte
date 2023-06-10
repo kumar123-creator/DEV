@@ -2,7 +2,6 @@
   import { onMount } from "svelte";
   import DevExpress from "devextreme";
 
-  // Sample data
   let jsonData = [];
   let data = [];
 
@@ -15,9 +14,9 @@
     jsonData = responseData.data;
 
     const gridData = jsonData.map((item) => ({
-      id: item.id,
       firstName: item.firstName,
       surname: item.surname,
+      id: item.id,
       email: item.email,
       mobile: item.mobile,
     }));
@@ -25,9 +24,9 @@
     var dataGrid = new DevExpress.ui.dxDataGrid("#dataGrid", {
       dataSource: gridData,
       columns: [
-        { dataField: "id", caption: "ID" },
         { dataField: "firstName", caption: "First Name" },
         { dataField: "surname", caption: "Surname" },
+        { dataField: "id", caption: "ID" },
         { dataField: "email", caption: "Email" },
         { dataField: "mobile", caption: "Mobile" },
       ],
