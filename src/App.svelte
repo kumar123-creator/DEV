@@ -102,11 +102,21 @@
 </script>
 
 <style>
+  body {
+    background-color: #f4f7fa;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+  }
+
   #dataGrid {
-    height: 400px;
+    background-color: #fff;
     border: 1px solid #ccc;
     border-radius: 4px;
     overflow: hidden;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
   }
 
   .dx-popup-content {
@@ -127,3 +137,4 @@
 </style>
 
 <div id="dataGrid"></div>
+
