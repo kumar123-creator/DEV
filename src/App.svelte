@@ -2,6 +2,7 @@
   import { onMount } from "svelte";
   import DevExpress from "devextreme";
 
+  // Sample data
   let jsonData = [];
   let data = [];
 
@@ -14,9 +15,9 @@
     jsonData = responseData.data;
 
     const gridData = jsonData.map((item) => ({
+      id: item.id,
       firstName: item.firstName,
       surname: item.surname,
-      id: item.id,
       email: item.email,
       mobile: item.mobile,
     }));
@@ -24,9 +25,9 @@
     var dataGrid = new DevExpress.ui.dxDataGrid("#dataGrid", {
       dataSource: gridData,
       columns: [
+        { dataField: "id", caption: "ID" },
         { dataField: "firstName", caption: "First Name" },
         { dataField: "surname", caption: "Surname" },
-        { dataField: "id", caption: "ID" },
         { dataField: "email", caption: "Email" },
         { dataField: "mobile", caption: "Mobile" },
       ],
@@ -45,6 +46,13 @@
         popup: {
           showTitle: true,
           title: "Row in the editing state",
+          width: 600,
+          height: 400,
+          position: {
+            my: "center",
+            at: "center",
+            of: window,
+          },
         },
         onRowUpdating: async (e) => {
           const updatedData = e.newData;
@@ -87,7 +95,7 @@
       },
       pager: {
         showPageSizeSelector: true,
-        allowedPageSizes: [2, 12, 22],
+        allowedPageSizes: [5, 10, 20],
         showInfo: true,
       },
     });
@@ -97,72 +105,25 @@
 <style>
   #dataGrid {
     height: 400px;
-    font-family: Arial, sans-serif;
-  }
-
-  .dx-datagrid.dx-datagrid-rowsview {
-    background-color: #f5f5f5;
-  }
-
-  .dx-datagrid.dx-datagrid-rowsview table {
-    width: 100%;
-    border-collapse: collapse;
-  }
-
-  .dx-datagrid.dx-datagrid-rowsview td,
-  .dx-datagrid.dx-datagrid-rowsview th {
-    padding: 8px;
-    border: 1px solid #ddd;
-    text-align: left;
-  }
-
-  .dx-datagrid.dx-datagrid-rowsview th {
-    background-color: #eee;
-  }
-
-  .dx-datagrid.dx-datagrid-rowsview .dx-editor-cell .dx-texteditor-input {
-    padding: 6px;
-    border: 1px solid #ddd;
+    border: 1px solid #ccc;
     border-radius: 4px;
+    overflow: hidden;
+  }
+
+  .dx-popup-content {
     background-color: #fff;
-    font-size: 14px;
-    color: #333;
-    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 4px;
   }
 
-  .dx-datagrid.dx-datagrid-rowsview .dx-filter-row .dx-editor-cell .dx-texteditor-input {
-    padding: 4px;
-  }
-
-  .dx-datagrid.dx-datagrid-rowsview .dx-command-edit {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .dx-datagrid.dx-datagrid-rowsview .dx-command-edit > a {
-    margin: 0 5px;
-  }
-
-  .dx-datagrid.dx-datagrid-rowsview .dx-command-edit > a.dx-link {
-    color: #0078d4;
-    text-decoration: none;
-  }
-
-  .dx-datagrid.dx-datagrid-rowsview .dx-command-edit > a.dx-link:hover {
-    text-decoration: underline;
-  }
-
-  .dx-datagrid.dx-datagrid-rowsview .dx-button {
-    padding: 4px 8px;
-    margin: 0;
-    font-size: 14px;
-  }
-
-  .dx-datagrid.dx-datagrid-rowsview .dx-popup-title {
-    font-size: 16px;
+  .dx-popup-title {
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px;
     font-weight: bold;
-    color: #333;
+    border-bottom: 1px solid #ccc;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
   }
 </style>
 
