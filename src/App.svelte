@@ -2,17 +2,17 @@
   import { onMount } from "svelte";
   import "bootstrap/dist/css/bootstrap.min.css";
   import DevExpress from "devextreme";
-
+  
   let jsonData = [];
   let gridData = [];
-
+  
   onMount(async () => {
     const response = await fetch(
       "https://api.recruitly.io/api/candidate?apiKey=TEST9349C0221517DA4942E39B5DF18C68CDA154"
     );
     const responseData = await response.json();
     jsonData = responseData.data;
-
+  
     gridData = jsonData.map((item) => ({
       id: item.id,
       firstName: item.firstName,
@@ -20,11 +20,11 @@
       email: item.email,
       mobile: item.mobile,
     }));
-
+  
     const dataGrid = new DevExpress.ui.dxDataGrid(document.getElementById("dataGrid"), {
       dataSource: gridData,
       columns: [
-        { dataField: "id", caption: "ID", width: 100 },
+        { dataField: "id", caption: "ID", width: 250 },
         { dataField: "firstName", caption: "Full Name", width: 200 },
         { dataField: "surname", caption: "Surname", width: 200 },
         { dataField: "email", caption: "Email", width: 200 },
@@ -77,7 +77,7 @@
               body: JSON.stringify(e.data),
             }
           );
-
+  
           const responseData = await response.json();
           if (response.ok) {
             e.data.firstName = responseData.firstName;
@@ -100,7 +100,7 @@
             email: e.newData.email === undefined ? e.oldData.email : e.newData.email,
             mobile: e.newData.mobile === undefined ? e.oldData.mobile : e.newData.mobile,
           }
-
+  
           console.log(newData)
           const response = await fetch(
             `https://api.recruitly.io/api/candidate/${e.key.id}?apiKey=TEST27306FA00E70A0F94569923CD689CA9BE6CA`,
@@ -149,6 +149,7 @@
           console.error("Failed to delete record:", error);
         }
       },
+      onInitialized: () => {},
     });
   });
 </script>
