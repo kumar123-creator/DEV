@@ -18,6 +18,7 @@
           jsonData = responseData.data;
           gridData = jsonData.map((item) => ({
             firstName: item.firstName,
+            lastName: item.lastName,
             id: item.id,
             email: item.email,
             mobile: item.mobile,
@@ -39,6 +40,7 @@
           dataSource: gridData,
           columns: [
             { dataField: "firstName", caption: "firstName", width: 200 },
+            { dataField: "lastName", caption: "lastName", width: 200 },
             { dataField: "id", caption: "id", width: 200 },
             { dataField: "email", caption: "email", width: 200 },
             { dataField: "mobile", caption: "mobile", width: 150 },
