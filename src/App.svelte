@@ -14,9 +14,10 @@
     jsonData = responseData.data;
   
     gridData = jsonData.map((item) => ({
-      id: item.id,
+      
       firstName: item.firstName,
       surname: item.surname,
+      id: item.id,
       email: item.email,
       mobile: item.mobile,
     }));
@@ -24,9 +25,10 @@
     const dataGrid = new DevExpress.ui.dxDataGrid(document.getElementById("dataGrid"), {
       dataSource: gridData,
       columns: [
-        { dataField: "id", caption: "ID", width: 250 },
+     
         { dataField: "firstName", caption: "Full Name", width: 200 },
         { dataField: "surname", caption: "Surname", width: 200 },
+        { dataField: "id", caption: "ID", width: 250 },
         { dataField: "email", caption: "Email", width: 200 },
         { dataField: "mobile", caption: "Mobile", width: 150 },
         // Define other columns as needed
@@ -45,14 +47,7 @@
         },
         popup: {
           showTitle: true,
-          title: "Edit Row",
-          width: "90%",
-          height: "90%",
-          position: {
-            my: "center",
-            at: "center",
-            of: window,
-          },
+          title: "Row in the editing state",
         },
         texts: {
           saveRowChanges: "Save",
@@ -94,18 +89,18 @@
         try {
           console.log(e);
           var newData = {
-            id: e.key.id,
             firstName: e.newData.firstName === undefined ? e.oldData.firstName : e.newData.firstName,
             surname: e.newData.surname === undefined ? e.oldData.surname : e.newData.surname,
+            id: e.key.id,
             email: e.newData.email === undefined ? e.oldData.email : e.newData.email,
             mobile: e.newData.mobile === undefined ? e.oldData.mobile : e.newData.mobile,
           }
   
           console.log(newData)
           const response = await fetch(
-            `https://api.recruitly.io/api/candidate/${e.key.id}?apiKey=TEST27306FA00E70A0F94569923CD689CA9BE6CA`,
+            `https://api.recruitly.io/api/candidate?apiKey=TEST9349C0221517DA4942E39B5DF18C68CDA154`,
             {
-              method: "PUT",
+              method: "POST",
               headers: {
                 "Content-Type": "application/json",
               },
@@ -115,11 +110,9 @@
           const responseData = await response.json();
           if (response.ok) {
             const updatedItemIndex = gridData.findIndex((item) => item.id === e.key);
-            if (updatedItemIndex > -1) {
-              // Replace the old item with the updated item from the response
-              gridData[updatedItemIndex] = responseData;
-              dataGrid.refresh();
-            }
+            gridData.push(e.newData);
+            gridData[updatedItemIndex] = e.newData;
+            dataGrid.refresh();
           } else {
             console.error("Failed to update record:", responseData.error);
           }
@@ -149,10 +142,13 @@
           console.error("Failed to delete record:", error);
         }
       },
-      onInitialized: () => {},
+      onInitialized: () => {
+  
+      },
     });
   });
 </script>
+<div id="dataGrid"></div>
 
 <style>
   body {
