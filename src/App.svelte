@@ -37,9 +37,9 @@
       dataSource: gridData,
       columns: [
         { dataField: "firstName", caption: "First Name", width: 200 },
-        { dataField: "surName", caption: "Surname", width: 200 },
-        { dataField: "id", caption: "ID", width: 150 },
-        { dataField: "email", caption: "Email", width: 250 },
+        { dataField: "surName", caption: "Sur Name", width: 200 },
+        { dataField: "id", caption: "ID", width: 200 },
+        { dataField: "email", caption: "Email", width: 200 },
         { dataField: "mobile", caption: "Mobile", width: 150 },
         // Define other columns as needed
       ],
@@ -57,9 +57,9 @@
         },
         popup: {
           showTitle: true,
-          title: "Edit Candidate",
-          width: 600,
-          height: 400,
+          title: "Edit Row",
+          width: "100%",
+          height: "100%",
           position: {
             my: "center",
             at: "center",
@@ -163,10 +163,11 @@
     align-items: center;
     height: 100vh;
     margin: 0;
-    font-family: Arial, sans-serif;
   }
 
   #dataGrid {
+    width: 100%;
+    height: 100%;
     background-color: #fff;
     border: 1px solid #ccc;
     border-radius: 4px;
@@ -188,26 +189,6 @@
     border-bottom: 1px solid #ccc;
     border-top-left-radius: 4px;
     border-top-right-radius: 4px;
-  }
-
-  .dx-toolbar {
-    background-color: #007bff;
-    color: #fff;
-    padding: 5px;
-  }
-
-  .dx-toolbar-label {
-    font-size: 16px;
-    font-weight: bold;
-    margin-right: 10px;
-  }
-
-  .dx-toolbar-button {
-    margin-right: 10px;
-  }
-
-  .dx-datagrid.dx-widget .dx-datagrid-rowsview tbody tr:nth-child(odd) {
-    background-color: #f9f9f9;
   }
 </style>
 
